@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="myForm">
+        <!-- <script defer src="./javascript.js"></script> -->
+        
+        <div>
+          <label>Nombre<span>*</span></label>
+          <input required type="text" name="first_name" placeholder="Nombre" />
+        </div>
+        
+        <div>
+          <label>Apellido<span>*</span></label>
+          <input required type="text" name="last_name" placeholder="Apellido" />
+        </div>
+        
+        <div>
+          <label>Teléfono<span>*</span></label>
+          <input required type="tel" name="phone_mobile" placeholder="+504 9999 9999" />
+        </div>
+        
+        <!-- <div>
+          <label>ID o RTN<span>*</span></label>
+          <input required type="text" name="rtn" placeholder="0501 2000 99999" />
+        </div> -->
+        
+        <div>
+          <label>Correo<span>*</span></label>
+          <input required type="email" name="email_address" placeholder="tu_correo@gmail.com" />
+        </div>
+        
+        <div>
+          <label for="country">Pais<span>*</span></label>
+          <select name="primary_address_country" id="country"></select>
+        </div>
+
+        <div>
+          <label for="state">Departamento<span>*</span></label>
+          <select name="primary_address_state" id="state">
+            <option disabled selected style="color: #bdbdbc;" >--- Seleccione un pais primero ---</option>
+          </select>
+        </div>
+      
+        <div id="equipment-container">
+          <div>
+            <label for="equipment">Equipo<span>*</span></label>
+            <select name="Equipo" id="equipment"></select>
+          </div>
+          
+          <div>
+            <label for="model">Modelo<span>*</span></label>
+            <select name="modelo" id="model">
+              <option disabled selected style="color: #bdbdbc;">--- Seleccione un equipo primero ---</option>
+            </select>
+          </div>
+        </div>
+      
+        <div>
+          <label>Mensaje<span class="optional-message">(opcional)</span></label>
+          <input id="message" type="text" name="Mensaje" placeholder="" />
+        </div>
+      
+        <!-- <div type="submit" onclick="saveFormData()"> -->
+          <!-- {{#custom_button "Enviar" class="formButton"}}{{/custom_button}} -->
+           <button id="btnEnviarData" type="submit" >Enviar</button>
+        <!-- </div> -->
+      </form>
+      
+    
+</body>
+<script src="./script.js" type="module">
+</script>
+</html>
