@@ -148,6 +148,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /////////////ENDPOINT//////////////////
 /////////////ENDPOINT//////////////////
+
+
 const leadApiUrl = "https://cemcoldev.sugarondemand.com/rest/v11_18/webtolead";
 const sugarTokenUrl = "https://cemcoldev.sugarondemand.com/rest/v11_18/oauth2/token"; // URL de desarrollo
 
@@ -183,6 +185,9 @@ let sugarToken;
   }
 })();
 
+
+
+
 // Obtener el botón y el formulario
 const btnEnviarData = document.getElementById("btnEnviarData");
 const form = document.getElementById("myForm");
@@ -191,26 +196,32 @@ if (btnEnviarData && form) {
   // Función para enviar datos al endpoint con headers y body configurados
   async function postForm(dataJson) {
     const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", `Bearer ${sugarToken}`);
+    // myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Oauth-Token", `Bearer ${sugarToken}`);
 
     const requestOptions = {
       method: "POST",
       headers: myHeaders,
+      mode: "no-cors",
       body: JSON.stringify(dataJson),
     };
 
     try {
       const response = await fetch(leadApiUrl, requestOptions);
-      const result = await response.text();
+      if (!response.ok) {
+        throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+      }
+      const result = await response.json(); // Parsear como JSON
       console.log("Respuesta del servidor:", result);
+      // Mostrar mensaje de éxito al usuario
     } catch (error) {
       console.error("Error en el envío de información:", error);
+      // Mostrar mensaje de error al usuario
     }
   }
 
-  // Evento `click` para enviar la información
-  btnEnviarData.addEventListener("click", (event) => {
+  // Función asincrónica manejadora del evento `click`
+  async function handleButtonClick(event) {
     event.preventDefault();
 
     const formData = new FormData(form);
@@ -219,6 +230,7 @@ if (btnEnviarData && form) {
     // Validar campos requeridos en data
     if (!data.first_name || !data.last_name || !data.email_address) {
       console.error("Faltan datos obligatorios");
+      // Mostrar mensaje de error al usuario
       return;
     }
 
@@ -251,11 +263,15 @@ if (btnEnviarData && form) {
 
     // Llamar a `postForm` con `dataJson`
     if (sugarToken) {
-      postForm(dataJson);
+      await postForm(dataJson);  // Usa await para esperar la finalización de `postForm`
     } else {
       console.error("Token no disponible. Intente de nuevo más tarde.");
+      // Mostrar mensaje al usuario si el token no está disponible
     }
-  });
+  }
+
+  // Asignar el evento `click` al botón con la función `handleButtonClick`
+  btnEnviarData.addEventListener("click", handleButtonClick);
 } else {
   console.error("Error: Elementos de formulario o botón no encontrados.");
 }
