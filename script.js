@@ -14,25 +14,24 @@ const countries = [
 ]
 
 const states = [
-  // Honduras (country_id: 1)
-  { country_id: 1, state_id: 1, name: "La Ceiba" },
-  { country_id: 1, state_id: 2, name: "Trujillo" },
+  { country_id: 1, state_id: 1, name: "Atlántida" },
+  { country_id: 1, state_id: 2, name: "Colón" },
   { country_id: 1, state_id: 3, name: "Comayagua" },
-  { country_id: 1, state_id: 4, name: "Santa Rosa de Copán" },
-  { country_id: 1, state_id: 5, name: "San Pedro Sula" },
+  { country_id: 1, state_id: 4, name: "Copán" },
+  { country_id: 1, state_id: 5, name: "Cortés" },
   { country_id: 1, state_id: 6, name: "Choluteca" },
-  { country_id: 1, state_id: 7, name: "Danlí" },
-  { country_id: 1, state_id: 8, name: "Tegucigalpa" },
-  { country_id: 1, state_id: 9, name: "Puerto Lempira" },
-  { country_id: 1, state_id: 10, name: "La Esperanza" },
-  { country_id: 1, state_id: 11, name: "Roatán" },
+  { country_id: 1, state_id: 7, name: "El Paraíso" },
+  { country_id: 1, state_id: 8, name: "Francisco Morazán" },
+  { country_id: 1, state_id: 9, name: "Gracias a Dios" },
+  { country_id: 1, state_id: 10, name: "Intibucá" },
+  { country_id: 1, state_id: 11, name: "Islas de la Bahía" },
   { country_id: 1, state_id: 12, name: "La Paz" },
-  { country_id: 1, state_id: 13, name: "Gracias" },
+  { country_id: 1, state_id: 13, name: "Lempira" },
   { country_id: 1, state_id: 14, name: "Ocotepeque" },
-  { country_id: 1, state_id: 15, name: "Juticalpa" },
+  { country_id: 1, state_id: 15, name: "Olancho" },
   { country_id: 1, state_id: 16, name: "Santa Bárbara" },
-  { country_id: 1, state_id: 17, name: "Nacaome" },
-  { country_id: 1, state_id: 18, name: "El Progreso" },
+  { country_id: 1, state_id: 17, name: "Valle" },
+  { country_id: 1, state_id: 18, name: "Yoro" },
   
   // Nicaragua (country_id: 2)
   { country_id: 2, state_id: 1, name: "Managua" },
@@ -143,13 +142,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-
-  ////////////////////////
-
+  
 /////////////ENDPOINT//////////////////
-/////////////ENDPOINT//////////////////
-
-
 const leadApiUrl = "https://cemcoldev.sugarondemand.com/rest/v11_18/webtolead";
 const sugarTokenUrl = "https://cemcoldev.sugarondemand.com/rest/v11_18/oauth2/token"; // URL de desarrollo
 
@@ -193,16 +187,16 @@ const btnEnviarData = document.getElementById("btnEnviarData");
 const form = document.getElementById("myForm");
 
 if (btnEnviarData && form) {
+  
   // Función para enviar datos al endpoint con headers y body configurados
   async function postForm(dataJson) {
     const myHeaders = new Headers();
-    // myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Oauth-Token", `Bearer ${sugarToken}`);
 
     const requestOptions = {
       method: "POST",
       headers: myHeaders,
-      mode: "no-cors",
       body: JSON.stringify(dataJson),
     };
 
